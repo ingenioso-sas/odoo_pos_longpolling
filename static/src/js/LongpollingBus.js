@@ -40,8 +40,12 @@ odoo.define("pos_longpolling.LongpollingBus", function(require) {
                     // DIFFERENCES FROM ORIGINAL:
                     // * change connection status to online
                     var poll_connection = self.pos_longpolling;
-                    poll_connection.set_waiting_poll_response(false);
-                    poll_connection.network_is_on();
+                    if( poll_connection ) {
+                        poll_connection.set_waiting_poll_response(false);
+                        poll_connection.network_is_on();
+                    } else {
+                        console.log("Error: poll_connection indefinido");
+                    }
                 },
                 function(error, ev) {
                     ev = ev || error.event;
